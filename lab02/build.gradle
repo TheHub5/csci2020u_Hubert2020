@@ -1,0 +1,20 @@
+plugins {
+    id "application"
+	id 'java'
+}
+apply plugin : "java"
+apply plugin : "application"
+ext {
+   javaMainClass = "com.baeldung.gradle.exec.MainClass"
+}
+ 
+application {
+    mainClassName = "SimpleTest"
+}
+
+
+task hello {
+        doLast {
+                println 'Hello Java2Novice...'
+ }
+ }
