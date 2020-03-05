@@ -1,0 +1,56 @@
+buildscript {
+  repositories {
+    flatDir dirs: 'proguard6.2.2/lib'
+  }
+  dependencies {
+    classpath ':proguard'
+  }
+}
+
+plugins {
+    id "application"
+	id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+implementation 'org.apache.commons:commons-csv:1.7'
+}
+
+
+
+apply plugin : "java"
+apply plugin : "application"
+ext {
+   javaMainClass = "com.baeldung.gradle.exec.MainClass"
+}
+ 
+gradle
+sourceCompatibility = 1.8
+version = '1.0'
+jar {
+  manifest {
+    attributes 'Main-Class': 'gradleDemo.demo',
+          'Implementation-Title': 'Gradle-Demo',
+          'Implementation-Version': version
+  }
+}
+ 
+application {
+    mainClassName = "CSVDemo"
+}
+
+task (minify, dependsOn: 'jar', type: proguard.gradle.ProGuardTask) {
+  configuration 'proguard.cfg'
+  injars 'build/libs/Lab03.jar'
+  outjars 'build/libs/Lab03.min.jar'
+}
+
+task hello {
+        doLast {
+                println 'Hello Java2Novice...'
+ }
+ }
